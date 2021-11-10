@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1
+namespace Notepad_2021
 {
     partial class FormMain
     {
@@ -117,6 +117,7 @@
             this.nuovoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.nuovoToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
             this.nuovoToolStripMenuItem.Text = "&Nuovo";
+            this.nuovoToolStripMenuItem.Click += new System.EventHandler(this.nuovoToolStripMenuItem_Click);
             // 
             // apriToolStripMenuItem
             // 
@@ -126,6 +127,7 @@
             this.apriToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.apriToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
             this.apriToolStripMenuItem.Text = "&Apri...";
+            this.apriToolStripMenuItem.Click += new System.EventHandler(this.apriToolStripMenuItem_Click);
             // 
             // salvaToolStripMenuItem
             // 
@@ -140,7 +142,7 @@
             // salvaconnomeToolStripMenuItem
             // 
             this.salvaconnomeToolStripMenuItem.Name = "salvaconnomeToolStripMenuItem";
-            this.salvaconnomeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.salvaconnomeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
             this.salvaconnomeToolStripMenuItem.Size = new System.Drawing.Size(267, 22);
             this.salvaconnomeToolStripMenuItem.Text = "Salva &con nome...";
@@ -458,7 +460,7 @@
             this.Controls.Add(this.menuStripMain);
             this.MainMenuStrip = this.menuStripMain;
             this.Name = "FormMain";
-            this.Text = "Blocco note di Windows";
+            this.Tag = " - Blocco note di Windows";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStripMain.ResumeLayout(false);
@@ -519,5 +521,3 @@
         private System.Windows.Forms.FontDialog fontDialogMain;
     }
 }
-
-
