@@ -1,66 +1,22 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class FormMain : Form
+    static class Program
     {
-
-        string fileName;
-        string filePath;
-        string savedContent;
-
-        public FormMain()
+        /// <summary>
+        /// Punto di ingresso principale dell'applicazione.
+        /// </summary>
+        [STAThread]
+        static void Main()
         {
-            fileName = "Senza nome";
-            filePath = "";
-            savedContent = "";
-            InitializeComponent();
-        }
-
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void esciToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (richTextBoxMain.Text != savedContent)
-            {
-                MessageBox.Show("C'è qualcosa da salvare...");
-                e.Cancel = true;
-            }
-        }
-
-        private void salvaconnomeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (saveFileDialogMain.ShowDialog() == DialogResult.OK)
-                saveDocument(saveFileDialogMain.FileName);
-        }
-
-        private void salvaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (filePath.Length == 0)
-                salvaconnomeToolStripMenuItem_Click(sender, e);
-            else
-                saveDocument(filePath);
-        }
-
-        private void saveDocument(string filePath)
-        {
-            MessageBox.Show("Sto per salvare al path: " + filePath);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Notepad_2021.FormMain());
         }
     }
 }
