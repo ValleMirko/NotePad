@@ -1,6 +1,4 @@
-﻿using WindowsFormsApp1;
-
-namespace Notepad_2021
+﻿namespace Notepad_2021
 {
     partial class FormMain
     {
@@ -61,7 +59,7 @@ namespace Notepad_2021
             this.oraDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.formatoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acapoautomaticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.opzioniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.carattereToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visualizzaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zoomAvantiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,7 +71,7 @@ namespace Notepad_2021
             this.indiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.informazionisuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.richTextBoxMain = new RichTextBoxEx();
+            this.richTextBoxMain = new Notepad_2021.RichTextBoxEx();
             this.statusBarMain = new System.Windows.Forms.StatusStrip();
             this.saveFileDialogMain = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialogMain = new System.Windows.Forms.OpenFileDialog();
@@ -327,7 +325,7 @@ namespace Notepad_2021
             // 
             this.formatoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.acapoautomaticoToolStripMenuItem,
-            this.opzioniToolStripMenuItem});
+            this.carattereToolStripMenuItem});
             this.formatoToolStripMenuItem.Name = "formatoToolStripMenuItem";
             this.formatoToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.formatoToolStripMenuItem.Text = "F&ormato";
@@ -336,14 +334,15 @@ namespace Notepad_2021
             // 
             this.acapoautomaticoToolStripMenuItem.CheckOnClick = true;
             this.acapoautomaticoToolStripMenuItem.Name = "acapoautomaticoToolStripMenuItem";
-            this.acapoautomaticoToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.acapoautomaticoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.acapoautomaticoToolStripMenuItem.Text = "A capo au&tomatico";
             // 
-            // opzioniToolStripMenuItem
+            // carattereToolStripMenuItem
             // 
-            this.opzioniToolStripMenuItem.Name = "opzioniToolStripMenuItem";
-            this.opzioniToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.opzioniToolStripMenuItem.Text = "&Opzioni";
+            this.carattereToolStripMenuItem.Name = "carattereToolStripMenuItem";
+            this.carattereToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.carattereToolStripMenuItem.Text = "Cara&ttere...";
+            this.carattereToolStripMenuItem.Click += new System.EventHandler(this.carattereToolStripMenuItem_Click);
             // 
             // visualizzaToolStripMenuItem
             // 
@@ -361,7 +360,7 @@ namespace Notepad_2021
             this.zoomIndietroToolStripMenuItem,
             this.ripristinaZoomPredefinitoToolStripMenuItem});
             this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
-            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.zoomToolStripMenuItem.Text = "&Zoom";
             // 
             // zoomAvantiToolStripMenuItem
@@ -391,7 +390,7 @@ namespace Notepad_2021
             // 
             this.barraDistatoToolStripMenuItem.CheckOnClick = true;
             this.barraDistatoToolStripMenuItem.Name = "barraDistatoToolStripMenuItem";
-            this.barraDistatoToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.barraDistatoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.barraDistatoToolStripMenuItem.Text = "Barra di &stato";
             // 
             // ToolStripMenuItem
@@ -516,7 +515,7 @@ namespace Notepad_2021
         private System.Windows.Forms.ToolStripMenuItem selezionatuttoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem formatoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acapoautomaticoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem opzioniToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem carattereToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sommarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem indiceToolStripMenuItem;

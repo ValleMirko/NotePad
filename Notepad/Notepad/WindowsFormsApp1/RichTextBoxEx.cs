@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Drawing.Printing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace Notepad_2021
 {
-    class RichTextBoxEx:RichTextBox
+    class RichTextBoxEx: RichTextBox
     {
         [StructLayout(LayoutKind.Sequential)]
         private struct STRUCT_RECT
@@ -15,6 +15,14 @@ namespace WindowsFormsApp1
             public Int32 right;
             public Int32 bottom;
         }
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct STRUCT_CHARRANGE
+        {
+            public Int32 cpMin;
+            public Int32 cpMax;
+        }
+
         [StructLayout(LayoutKind.Sequential)]
         private struct STRUCT_FORMATRANGE
         {
@@ -24,6 +32,7 @@ namespace WindowsFormsApp1
             public STRUCT_RECT rcPage;
             public STRUCT_CHARRANGE chrg;
         }
+
         [DllImport("user32.dll")]
         private static extern Int32 SendMessage(IntPtr hWnd, Int32 msg,
                                         Int32 wParam, IntPtr lParam);
@@ -34,14 +43,11 @@ namespace WindowsFormsApp1
         /// <summary>
         /// Calculate or render the contents of our RichTextBox for printing
         /// </summary>
-        /// <param name="measureOnly">If true, only the calculation is performed,
-        /// otherwise the text is rendered as well</param>
-        /// <param name="e">The PrintPageEventArgs object from the
-        /// PrintPage event</param>
+        /// <param name="measureOnly">If true, only the calculation is performed, otherwise the text is rendered as well</param>
+        /// <param name="e">The PrintPageEventArgs object from the PrintPage event</param>
         /// <param name="charFrom">Index of first character to be printed</param>
         /// <param name="charTo">Index of last character to be printed</param>
-        /// <returns>(Index of last character that fitted on the
-        /// page) + 1</returns>
+        /// <returns>(Index of last character that fitted on the page) + 1</returns>
         public int FormatRange(bool measureOnly, PrintPageEventArgs e,
                                int charFrom, int charTo)
         {
@@ -94,10 +100,9 @@ namespace WindowsFormsApp1
 
             return res;
         }
-        // C#
+
         /// <summary>
-        /// Convert between 1/100 inch (unit used by the .NET framework)
-        /// and twips (1/1440 inch, used by Win32 API calls)
+        /// Convert between 1/100 inch (unit used by the .NET framework) and twips (1/1440 inch, used by Win32 API calls)
         /// </summary>
         /// <param name="n">Value in 1/100 inch</param>
         /// <returns>Value in twips</returns>
@@ -105,6 +110,7 @@ namespace WindowsFormsApp1
         {
             return (Int32)(n * 14.4);
         }
+
         /// <summary>
         /// Free cached data from rich edit control after printing
         /// </summary>

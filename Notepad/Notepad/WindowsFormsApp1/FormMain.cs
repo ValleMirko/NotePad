@@ -14,7 +14,9 @@ namespace Notepad_2021
         string fileName;
         string filePath;
         string savedContent;
-        int m_nFirstCharOnPage;
+
+        // variable to trace text to print for pagination
+        private int m_nFirstCharOnPage;
 
         #endregion
 
@@ -118,13 +120,33 @@ namespace Notepad_2021
             printDocumentMain.DocumentName = fileName;
             if (printDialogMain.ShowDialog() == DialogResult.OK)
             {
-                printDocumentMain.Print();
+                try
+                {
+                    printDocumentMain.Print();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(
+                        "Problemi durante la stampa.\nSe stai stampando su file verifica che il file di destinazione non sia aperto.",
+                        "ATTENZIONE!",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                }
             }
         }
 
         private void esciToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void carattereToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fontDialogMain.Font = richTextBoxMain.Font;
+            if (fontDialogMain.ShowDialog() == DialogResult.OK)
+            {
+                richTextBoxMain.Font = fontDialogMain.Font;
+            }
         }
 
         #endregion
@@ -168,35 +190,41 @@ namespace Notepad_2021
         {
             // Start at the beginning of the text
             m_nFirstCharOnPage = 0;
+        }
 
+        private void printDocumentMain_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            //string content = richTextBoxMain.Text;
+            //Font font = richTextBoxMain.Font;
+            //e.Graphics.DrawString(
+            //    content,
+            //    font,
+            //    new SolidBrush(Color.Black),
+            //    e.MarginBounds.X,
+            //    e.MarginBounds.Y);
+            // To print the boundaries of the current page margins
+            // uncomment the next line:
+            // e.Graphics.DrawRectangle(System.Drawing.Pens.Blue, e.MarginBounds);
+
+            // make the RichTextBoxEx calculate and render as much text as will
+            // fit on the page and remember the last character printed for the
+            // beginning of the next page
+            m_nFirstCharOnPage = richTextBoxMain.FormatRange(false,
+                                                    e,
+                                                    m_nFirstCharOnPage,
+                                                    richTextBoxMain.TextLength);
+
+            // check if there are more pages to print
+            if (m_nFirstCharOnPage < richTextBoxMain.TextLength)
+                e.HasMorePages = true;
+            else
+                e.HasMorePages = false;
         }
 
         private void printDocumentMain_EndPrint(object sender, PrintEventArgs e)
         {
             // Clean up cached information
             richTextBoxMain.FormatRangeDone();
-        }
-        private void printDocumentMain_PrintPage(object sender, PrintPageEventArgs e)
-        {
-            string content = richTextBoxMain.Text;
-            Font font = richTextBoxMain.Font;
-            e.Graphics.DrawString(
-                content,
-                font,
-                new SolidBrush(Color.Black),
-                e.MarginBounds.X,
-                e.MarginBounds.Y);
-
-            m_nFirstCharOnPage = myRichTextBoxEx.FormatRange(false,
-                                e,
-                                m_nFirstCharOnPage,
-                                myRichTextBoxEx.TextLength);
-
-            // check if there are more pages to print
-            if (m_nFirstCharOnPage < myRichTextBoxEx.TextLength)
-                e.HasMorePages = true;
-            else
-                e.HasMorePages = false;
         }
 
         #endregion
@@ -260,6 +288,5 @@ namespace Notepad_2021
         }
 
         #endregion
-
     }
 }
