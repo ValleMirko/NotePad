@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Notepad_2021
 {
-    class RichTextBoxEx: RichTextBox
+    class RichTextBoxEx : RichTextBox
     {
         [StructLayout(LayoutKind.Sequential)]
         private struct STRUCT_RECT

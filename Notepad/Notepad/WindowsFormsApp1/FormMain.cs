@@ -52,6 +52,7 @@ namespace Notepad_2021
 
         #region menu-item handlers
 
+        // FILE
         private void nuovoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (richTextBoxMain.Text != savedContent)
@@ -140,6 +141,59 @@ namespace Notepad_2021
             Close();
         }
 
+        //MODIFICA
+        private void annullaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBoxMain.Undo();
+        }
+        private void tagliaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBoxMain.Cut();
+        }
+        private void copiaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBoxMain.Copy();
+        }
+        private void incollaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBoxMain.Paste();
+        }
+        private void eliminaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+        private void cercaConBingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trovaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trovaSuccessivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trovaPrecedenteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sostituisciToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void vaiAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        //FORMATO
         private void carattereToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fontDialogMain.Font = richTextBoxMain.Font;
@@ -288,5 +342,6 @@ namespace Notepad_2021
         }
 
         #endregion
+
     }
 }
