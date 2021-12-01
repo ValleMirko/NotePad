@@ -181,7 +181,11 @@ namespace Notepad_2021
         {
 
         }
-
+        private void oraDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DateTime now = DateTime.Now;
+            richTextBoxMain.SelectedText = now.ToShortTimeString() + " " + now.ToShortDateString();
+        }
         private void sostituisciToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
