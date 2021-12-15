@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Windows.Forms;
+using WindowsFormsApp1;
 
 namespace Notepad_2021
 {
@@ -25,6 +26,7 @@ namespace Notepad_2021
         public FormMain()
         {
             InitializeComponent();
+            richTextBoxMain.WordWrap = acapoautomaticoToolStripMenuItem.Checked;
             pageSetupDialogMain.Document = printDocumentMain;
             printDialogMain.Document = printDocumentMain;
         }
@@ -41,6 +43,9 @@ namespace Notepad_2021
             savedContent = "";
             richTextBoxMain.Clear();
             setFormTitle();
+            annullaToolStripMenuItem.Enabled = false;
+           // enableDisableCopyCutRemove.Enable = false;
+
         }
 
         private void setFormTitle()
@@ -160,7 +165,7 @@ namespace Notepad_2021
         }
         private void eliminaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            richTextBoxMain.SelectedText = string.Empty;
         }
         private void cercaConBingToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -181,11 +186,7 @@ namespace Notepad_2021
         {
 
         }
-        private void oraDataToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DateTime now = DateTime.Now;
-            richTextBoxMain.SelectedText = now.ToShortTimeString() + " " + now.ToShortDateString();
-        }
+
         private void sostituisciToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -193,11 +194,30 @@ namespace Notepad_2021
 
         private void vaiAToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FormVaiAllaRiga formVaiAllaRiga = new FormVaiAllaRiga(richTextBoxMain.Lines.Length);
+            if(formVaiAllaRiga.ShowDialog() == DialogResult.OK)
+            {
+                int numRiga = richTextBoxMain.GetFirstCharIndexFromLine(formVaiAllaRiga.NumeroRiga - 1);
+                if (numRiga != -1) richTextBoxMain.SelectionStart = numRiga;
+            }
+        }
+        private void selezionatuttoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBoxMain.SelectAll();
+        }
+        private void oraDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DateTime now = DateTime.Now;
+            richTextBoxMain.SelectedText = now.ToShortTimeString() + " " + now.ToShortDateString();
         }
 
 
         //FORMATO
+        private void acapoautomaticoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBoxMain.WordWrap =  acapoautomaticoToolStripMenuItem.Checked;
+            vaiAToolStripMenuItem.Enabled = !acapoautomaticoToolStripMenuItem.Checked;
+        }
         private void carattereToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fontDialogMain.Font = richTextBoxMain.Font;
@@ -232,6 +252,7 @@ namespace Notepad_2021
 
         private void richTextBoxMain_TextChanged(object sender, EventArgs e)
         {
+            annullaToolStripMenuItem.Enabled = true;
             if (richTextBoxMain.Text != savedContent && fileName[0] != '*')
             {
                 fileName = "*" + fileName;
@@ -323,6 +344,10 @@ namespace Notepad_2021
                     MessageBoxIcon.Warning);
             }
         }
+        private void FormMain_Load_Acdtiveted(object sender, EventArgs e)
+        {
+            incollaToolStripMenuItem.Enabled = Clipboard.ContainsText() || Clipboard.ContainsImage();
+        }
 
         private void saveDocument(string fp)
         {
@@ -346,6 +371,14 @@ namespace Notepad_2021
         }
 
         #endregion
+
+        private void enableDisableCopyCutRemove(object sender, EventArgs e)
+        {
+            bool enableButtons = richTextBoxMain.SelectedText.Length > 0;
+            copiaToolStripMenuItem.Enabled = enableButtons;
+            tagliaToolStripMenuItem.Enabled = enableButtons;
+            eliminaToolStripMenuItem.Enabled = enableButtons;
+        }
 
     }
 }
