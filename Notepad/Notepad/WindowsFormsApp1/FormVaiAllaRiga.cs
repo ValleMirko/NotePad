@@ -15,13 +15,13 @@ namespace WindowsFormsApp1
         public int NumeroRiga;
 
         private int totRighe;
-        private bool isCancel = false;
+        private bool isCancel = true;
 
-        public FormVaiAllaRiga(int tr)
+        public FormVaiAllaRiga(int tr, int riga)
         {
             totRighe = tr;
             InitializeComponent();
-            NumeroRiga = 1;
+            NumeroRiga = riga + 1;
             txtNumeroRiga.Text = NumeroRiga.ToString();
         }
 
@@ -32,7 +32,9 @@ namespace WindowsFormsApp1
 
         private void btnVaiA_Click(object sender, EventArgs e)
         {
-            NumeroRiga = int.Parse(txtNumeroRiga.Text);
+            NumeroRiga = txtNumeroRiga.Text != "" && txtNumeroRiga.Text != "0" ? int.Parse(txtNumeroRiga.Text) : int.MaxValue;
+            isCancel = false;
+
         }
 
         private void btnAnnulla_Click(object sender, EventArgs e)
